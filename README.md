@@ -1,7 +1,7 @@
-# Jazyk R - Analýza Časovych Radov (Time Series Analysis and Forecasting)
+# 📈 Jazyk R - Analýza Časovych Radov (Time Series Analysis and Forecasting)
 Zdrojové kódy a materiály v jazyku R pre analýzu časových radov (Time Series Analysis and Forecasting)
 
-## Metadáta
+## 🏷️ Metadáta
 ```r
 # IT_Academy_Data.R
 
@@ -10,18 +10,18 @@ Zdrojové kódy a materiály v jazyku R pre analýzu časových radov (Time Seri
 # Datum: 5.3.2020
 ```
 
-## Inštalácia balíčkov readxl, forecast, tseries (install packages)
+## 📦 Inštalácia balíčkov readxl, forecast, tseries (install packages)
 ```r
 # Inštalácia balíčka pre prácu s Excel súbormi, predpoveďami a časovými radami
 # install.packages("readxl", "forecast", "tseries" )
 ```
 
-## Nastavenie cesty k súboru (Set working directory)
+## 📁 Nastavenie cesty k súboru (Set working directory)
 ```r
 # Nastavenie cesty k súboru
 setwd("C:\\Users\\Administrator\\Desktop\\")
 ```
-## Import balíčkov pre prácu s Excel súbormi a pre prognózovanie
+## 📦 Import balíčkov pre prácu s Excel súbormi a pre prognózovanie
 ```r
 # Import balíčkov pre prácu s Excel súbormi
 library("readxl")
@@ -31,19 +31,19 @@ library("Rcpp")
 library(forecast)
 ```
 
-## Kombinovanie viacerých grafov do jedného celkového grafu
+## 📈 Kombinovanie viacerých grafov do jedného celkového grafu
 ```r
 # Kombinovanie viacerých grafov do jedného celkového grafu
 par(ask=TRUE)
 ```
 
-## Načítanie dát z Excelu
+## 👁️‍🗨️ Načítanie dát z Excelu
 ```r
 # Načítanie dát z Excelu
 IT_Academy_Data = read_excel("IT Academy Data.xlsx")
 ```
 
-## Rozdelenie stĺpcov do samostatných premenných
+## 🌪️ Rozdelenie stĺpcov do samostatných premenných
 ```r
 # Rozdelenie stĺpcov do samostatných premenných
 roky = IT_Academy_Data[1]
@@ -51,7 +51,7 @@ roky_kodovane = IT_Academy_Data[2]
 velkosti_dat = IT_Academy_Data[3]
 ```
 
-## Vytvorenie časového radu
+## 📈 Vytvorenie časového radu
 ```r
 # Vytvorenie časového radu
 casova_rada_data = ts(data = velkosti_dat[1:9,1],start = 2012,frequency = 1)
@@ -77,7 +77,7 @@ end(casova_rada_data)
 frequency(casova_rada_data)
 ```
 
-## Jednoduché kĺzavé priemery
+## 📈 Jednoduché kĺzavé priemery
 ```r
 # Jednoduché kĺzavé priemery
 opar = par(no.readonly = TRUE)
@@ -90,7 +90,7 @@ abline(v=(seq(2012, 2020, 1)), col="lightgray", lty="dotted")
 abline(h=(seq(0,1500,250)), col="lightgray", lty="dotted")
 ```
 
-## Bug s prekreslením a kombinovaním grafov
+## 📉 Bug s prekreslením a kombinovaním grafov
 ```r
 # Bug s prekreslením a kombinovaním grafov
 plot(ma(casova_rada_data, 3), main = "Jednoduché kĺzavé priemery (MA=3)", ylim = ylim, 
@@ -116,14 +116,14 @@ abline(h=(seq(0,1500,250)), col="lightgray", lty="dotted")
 par(opar)
 ```
 
-## Sezónna dekompozícia
+## 📉 Sezónna dekompozícia
 ```r
 # Sezónna dekompozícia, pre naše dáta nepoužiteľné, keďže neobsahujú sezónnu zložku
 # fit = stl(casova_rada_data, s.window="period")
 # plot(fit)
 ```
 
-## Exponenciálne modely
+## 🥇 Exponenciálne modely
 ```r
 # Exponenciálne modely
 # Jednoduchý exponenciálny - modeluje Alphu
@@ -132,7 +132,7 @@ fit
 accuracy(forecast(fit))
 ```
 
-## Dvojitý exponenciálny model - modeluje Alphu a trendovú zložku
+## 🥈 Dvojitý exponenciálny model - modeluje Alphu a trendovú zložku
 ```r
 # Dvojitý exponenciálny model - modeluje Alphu a trendovú zložku
 fit = HoltWinters(casova_rada_data, gamma = FALSE)
@@ -140,7 +140,7 @@ fit
 accuracy(forecast(fit))
 ```
 
-## Trojitý exponenciálny model - modeluje priemerné hodnoty v rade, trendovú a sezónnu zložku
+## 🥉 Trojitý exponenciálny model - modeluje priemerné hodnoty v rade, trendovú a sezónnu zložku
 ```r
 # Trojitý exponenciálny model - modeluje priemerné hodnoty v rade, trendovú a sezónnu zložku
 # Potrebné aspoň 2 periódy
@@ -149,20 +149,20 @@ accuracy(forecast(fit))
 # accuracy(forecast(fit))
 ```
 
-## Výpočet chýb predikcií a prognóz (ME, RMSE, MAE, MPE, MAPE, MASE, ACF1)
+## 💹 Výpočet chýb predikcií a prognóz (ME, RMSE, MAE, MPE, MAPE, MASE, ACF1)
 ```r
 # Výpočet chýb predikcií a prognóz (ME, RMSE, MAE, MPE, MAPE, MASE, ACF1)
 # accuracy(casova_rada_data)
 ```
 
-## Prognóza na najbližšie 3 roky (Forecast)
+## 💹 Prognóza na najbližšie 3 roky (Forecast)
 ```r
 # Prognóza na najbližšie 3 roky
 forecast(casova_rada_data, 3)
 accuracy(forecast(casova_rada_data))
 ```
 
-## Vykreslenie grafu s prognózou na najbližšie 3 roky
+## 💹 Vykreslenie grafu s prognózou na najbližšie 3 roky
 ```r
 # Vykreslenie grafu s prognózou na najbližšie 3 roky
 par(ask=FALSE)
@@ -180,7 +180,7 @@ abline(v=(seq(2012, 2023, 1)), col="lightgray", lty="dotted")
 abline(h=(seq(0,3500,500)), col="lightgray", lty="dotted")
 ```
 
-## Automatická prognóza s pomocou exponenciálneho modelu (ETS a fit)
+## 💹 Automatická prognóza s pomocou exponenciálneho modelu (ETS a fit)
 ```r
 # Automatická prognóza s pomocou exponenciálneho modelu
 fit2 = ets(casova_rada_data)
@@ -190,7 +190,7 @@ forecast(fit2, 3)
 accuracy(fit2)
 ```
 
-## Automatická prognóza ARIMA
+## 💲 Automatická prognóza ARIMA
 ```r
 # Automatická prognóza ARIMA
 fit2 = auto.arima(casova_rada_data)
@@ -199,7 +199,7 @@ forecast(fit2, 3)
 accuracy(fit2)
 ```
 
-## Balíček funkcií Technical Trading Rules (Package TTR)
+## 📦 Balíček funkcií Technical Trading Rules (Package TTR)
 ```r
 # Balíček funkcií Technical Trading Rules 
 # Zabudované funkcie pre kĺzavé priemery
@@ -213,10 +213,9 @@ casova_rada_data_predpovede <- HoltWinters(casova_rada_data, beta = FALSE, gamma
 casova_rada_data_predpovede
 ```
 
-## Výpočet Error Sum of Squares
+## 💣 Výpočet Error Sum of Squares
 ```r
 # Výpočet Error Sum of Squares
 casova_rada_data_predpovede$SSE
 plot(casova_rada_data_predpovede)
 ```
-
